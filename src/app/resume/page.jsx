@@ -20,7 +20,7 @@ import {motion} from "framer-motion";
 
 const about = {
     title: 'About me',
-    description: 'I\'m a dedicated web developer with a passion for building seamless digital experiences. With a strong foundation in frontend technologies and a keen eye for design, I aim to create impactful, user-friendly interfaces that bring ideas to life.',
+    description: 'Senior Frontend Engineer with 4+ years of experience building scalable and high-performance web applications using React and Next.js. Specialized in frontend architecture, performance optimization, and delivering production-ready user interfaces for international and remote teams.',
     info: [
         {
             fieldName: "Name",
@@ -38,8 +38,8 @@ const about = {
 
         },
         {
-            fieldName: "Skype",
-            fieldValue: "Murod Shakhriddinov"
+            fieldName: 'Location',
+            fieldValue: 'Tashkent, Uzbekistan (Remote)'
 
         },
         {
@@ -53,149 +53,107 @@ const about = {
 
         },
         {
-            fieldName: "Freelance",
-            fieldValue: "Available"
+            fieldName: 'Availability',
+            fieldValue: 'Open to Remote Opportunities'
 
         },
         {
-            fieldName: "Language",
-            fieldValue: "Uzbek, English, Russia"
+            fieldName: 'Languages',
+            fieldValue: 'Uzbek (Native), English (Intermediate), Russian (Intermediate)'
 
         },
     ]
 }
 const experience = {
-    icon: <CiBadgeDollar/>,
-    title: 'My experience',
-    description: 'With a solid background in web development, I specialize in creating responsive and interactive digital solutions, managing projects effectively, and delivering high-quality results tailored to client needs.',
+    icon: <CiBadgeDollar />,
+    title: 'Professional Experience',
+    description: 'Senior Frontend Engineer with 3+ years of experience building scalable and high-performance web applications using React and Next.js. Experienced in remote collaboration with international teams, frontend architecture decisions, performance optimization, and mentoring junior developers.',
     items: [
         {
-            company: 'Ministry of Innovation.',
-            position: 'Front-End Developer (React.js)',
-            duration: 'Winter 2021'
+            company: 'Ministry of Innovation',
+            position: 'Frontend Engineer (React)',
+            duration: 'Dec 2021 – Feb 2022'
         },
         {
             company: 'OKS Technologies',
-            position: 'Front-End Developer',
-            duration: 'Summer 2022'
+            position: 'Frontend Engineer (React, Redux Toolkit)',
+            duration: 'Feb 2022 – Jun 2022'
         },
         {
-            company: 'Napa Avtomative',
-            position: 'Front-End Developer, Project Manager',
-            duration: '2022-2023'
+            company: 'NAPA Automotive',
+            position: 'Frontend Engineer',
+            duration: '2022 – 2023'
         },
         {
-            company: 'Tashkent City Prosecutor\'s Academy',
-            position: 'Front-End Developer (Angular)',
-            duration: 'Summer and Autumn 2023'
+            company: 'Tashkent City Prosecutor’s Academy',
+            position: 'Frontend Engineer (Angular)',
+            duration: 'Jun 2023 – Oct 2023'
         },
         {
-            company: 'Online Internet magazine.',
-            position: 'Front-End Developer (Next.js)',
-            duration: '2024 6-month'
+            company: 'Online Media Platform',
+            position: 'Frontend Engineer (Next.js)',
+            duration: 'Jan 2024 – Jun 2024'
         },
         {
-            company: 'E-commerce Startup',
-            position: 'Freelance Web-Developer',
-            duration: '2024 Winter'
+            company: 'E-commerce Startup (Poland)',
+            position: 'Senior Frontend Engineer — Remote',
+            duration: '2024 – Present'
         },
         {
-            company: 'Carplus',
-            position: 'Next.js and React.js',
-            duration: '2025 Summer'
+            company: 'CarPlus',
+            position: 'Senior Frontend Engineer (React, Next.js)',
+            duration: 'Mar 2025 – July'
         },
         {
-            company: 'Mars IT school',
-            position: 'Frontend mentor',
-            duration: '2025 from summer Currently'
-        },
+            company: 'Registon School',
+            position: 'Frontend Instructor & Mentor',
+            duration: '2025 – Present'
+        }
     ]
-}
+};
+
 const education = {
-    icon: <FaGraduationCap/>,
-    title: 'My education',
-    description: 'I hold a Bachelor\'s degree in Computer Science, where I focused on frontend development.\n' +
-        'I gained practical experience through various projects and coding boot camps.\n' +
-        'My studies equipped me with a strong foundation in programming languages and web technologies.\n' +
-        'I am committed to continuous learning in the rapidly evolving tech landscape.\n' +
-        '\n',
+    icon: <FaGraduationCap />,
+    title: 'Education',
+    description: 'Strong academic and self-taught background in computer science and frontend development. Focused on modern JavaScript frameworks, frontend architecture, and building real-world production applications through hands-on projects and continuous learning.',
     items: [
         {
             institution: 'University of Science and Technologies',
-            degree: 'Logistic',
-            duration: '2023-2028'
+            degree: 'Bachelor’s Degree — Logistics (In Progress)',
+            duration: '2023 – 2028'
         },
         {
             institution: 'PDP Academy',
-            degree: 'Front-End Developer',
-            duration: '2021 6-month'
+            degree: 'Frontend Development Program',
+            duration: '2021 (6 months)'
         },
         {
-            institution: 'Online Course',
-            degree: 'Front-End Web Developer',
-            duration: '2021 Present'
-        },
+            institution: 'Online Learning Platforms',
+            degree: 'Advanced Frontend Development (React, Next.js)',
+            duration: '2021 – Present'
+        }
+    ]
+};
 
-    ]
-};
 const skills = {
-    title: 'My Skills',
-    description: 'I excel in HTML, CSS, and JavaScript for frontend development.\n' +
-        'My expertise lies in using React and Redux to build dynamic applications.\n' +
-        'I leverage TypeScript to ensure code quality and maintainability.\n' +
-        'I design responsive layouts that enhance user experiences across devices.\n' +
-        'I implement SEO best practices to improve site visibility and rankings.\n' +
-        'I utilize Git for effective version control and team collaboration.',
+    title: 'Technical Skills',
+    description: 'Experienced in building scalable, high-performance frontend applications using modern JavaScript frameworks. Strong focus on clean architecture, reusable components, performance optimization, and responsive UI development for production environments.',
     skillList: [
-        {
-            icon: <FaHtml5/>,
-            name: 'html 5',
-        },
-        {
-            icon: <FaCss3/>,
-            name: 'css 3',
-        }, {
-            icon: <FaSass/>,
-            name: 'sass',
-        },
-        {
-            icon: <FaBootstrap/>,
-            name: 'bootstrap',
-        },
-        {
-            icon: <FaJs/>,
-            name: 'javascript',
-        },
-        {
-            icon: <FaReact/>,
-            name: 'react.js',
-        },
-        {
-            icon: <SiNextdotjs/>,
-            name: 'next.js',
-        },
-        {
-            icon: <SiTailwindcss/>,
-            name: 'tailwind.css',
-        },
-        {
-            icon: <SiRedux/>,
-            name: 'redux',
-        },
-        {
-            icon: <SiTypescript/>,
-            name: 'typescript',
-        },
-        {
-            icon: <FaFigma/>,
-            name: 'figma',
-        },
-        {
-            icon: <FaGithub/>,
-            name: 'github',
-        },
+        { icon: <FaHtml5 />, name: 'HTML5' },
+        { icon: <FaCss3 />, name: 'CSS3' },
+        { icon: <FaSass />, name: 'SCSS / SASS' },
+        { icon: <FaBootstrap />, name: 'Bootstrap' },
+        { icon: <SiTailwindcss />, name: 'Tailwind CSS' },
+        { icon: <FaJs />, name: 'JavaScript (ES6+)' },
+        { icon: <SiTypescript />, name: 'TypeScript' },
+        { icon: <FaReact />, name: 'React.js' },
+        { icon: <SiNextdotjs />, name: 'Next.js' },
+        { icon: <SiRedux />, name: 'Redux Toolkit' },
+        { icon: <FaFigma />, name: 'Figma (UI Collaboration)' },
+        { icon: <FaGithub />, name: 'Git & GitHub' }
     ]
 };
+
 
 const Resume = () => {
     return (
@@ -288,7 +246,7 @@ const Resume = () => {
                             <div className="flex flex-col gap-[30px]">
                                 <h3 className="text-4xl font-bold">{about.title}</h3>
                                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{about.description}</p>
-                                <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[628px] mx-auto xl:mx-0">
+                                <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[700px] mx-auto xl:mx-0">
                                     {about.info.map((item, index)=>{
                                         return <li key={index} className="flex items-center justify-center xl:justify-start gap-4">
                                             <span className="text-white/60">{item.fieldName}:</span>

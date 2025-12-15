@@ -17,21 +17,21 @@ import WorkSliderBtns from "@/components/WorkSliderBtns";
 const projects = [
     {
         num: '01',
-        category: 'frontend',
-        title: 'project 1',
-        description: 'Mga Rekmala. This is a Turkish banner maker and delivery company. The company\'s services and partners, successfully completed projects are posted on this site.',
+        category: 'Frontend',
+        title: 'MGA Reklama – Corporate Website',
+        description: 'Developed a responsive corporate website for a Turkish advertising and banner manufacturing company. Built reusable React components, implemented Redux for state management, and optimized page performance for fast loading and SEO visibility.',
         stack: [
-            {name: 'Html 5'},
-            {name: 'Sass 3'},
-            {name: 'Javascript'},
-            {name: 'React.js'},
-            {name: 'Redux'},
+            { name: 'HTML5' },
+            { name: 'SCSS' },
+            { name: 'JavaScript' },
+            { name: 'React.js' },
+            { name: 'Redux Toolkit' }
         ],
-        
         image: '/assets/work/mgareklama.png',
         live: 'http://www.mgareklama.com/',
         github: 'https://github.com/Shahriddinov/New-version-MGA'
     },
+
     {
         num: '02',
         category: 'frontend',
@@ -115,36 +115,37 @@ const projects = [
     },
     {
         num: '07',
-        category: 'frontend',
-        title: 'project 7',
-        description: 'EasyPrzeprowadzki – Moving Company Website I developed a modern, responsive website for EasyPrzeprowadzki, a professional moving company based in Poland. The site provides clear service descriptions, contact information, and a user-friendly experience across all devices. It was built using React.js and SCSS, optimized for speed and SEO, and designed with a clean, minimal aesthetic to build trust and clarity for potential customers.',
+        category: 'Frontend',
+        title: 'EasyPrzeprowadzki – Moving Company Platform',
+        description: 'Built a modern, SEO-optimized website for a Poland-based moving company. Implemented responsive UI components, multilingual support with i18next, and performance optimizations to improve load time and user engagement across devices.',
         stack: [
-            {name: 'Javascript'},
-            {name: 'React.js'},
-            {name: 'Redux'},
-            {name: 'Toolkit'},
-            {name: 'i18-next'},
+            { name: 'JavaScript' },
+            { name: 'React.js' },
+            { name: 'Redux Toolkit' },
+            { name: 'SCSS' },
+            { name: 'i18next' }
         ],
         image: '/assets/work/easy.png',
         live: 'https://easyprzeprowadzki.pl/',
         github: 'https://github.com/Shahriddinov/Easy-przeprowadzki'
     },
+
     {
         num: '08',
-        category: 'frontend',
-        title: 'project 8',
-        description: 'Carplus – Car Finance Platform I contributed to the development of Carplus, a UK-based car finance platform that helps users compare financing options like PCP, HP, and car loans. My role included implementing responsive UI components using React.js and SCSS, integrating sliders, FAQ sections, and dynamic forms. I focused on clarity, accessibility, and SEO-friendly development to improve both performance and user experience.',
+        category: 'Frontend',
+        title: 'Carplus – Car Finance Platform (UK)',
+        description: 'Contributed to a UK-based car finance platform used to compare PCP, HP, and loan options. Developed responsive React and Next.js components, dynamic forms, and SEO-friendly pages with a focus on performance, accessibility, and scalability.',
         stack: [
-            {name: 'Javascript'},
-            {name: 'React.js'},
-            {name: 'Redux'},
-            {name: 'Next js'},
-            
+            { name: 'JavaScript' },
+            { name: 'React.js' },
+            { name: 'Next.js' },
+            { name: 'Redux Toolkit' }
         ],
         image: '/assets/work/carplus.png',
         live: 'https://carplus.co.uk/',
         github: '#'
-    },
+    }
+
 ];
 
 const Work = () => {

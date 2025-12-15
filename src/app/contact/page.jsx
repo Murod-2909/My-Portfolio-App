@@ -27,9 +27,9 @@ const info = [
         description: 'shahriddinovmurod195@gmail.com',
     },
     {
-        icon: <FaMapMarkedAlt/>,
-        title: 'Address',
-        description: 'Uzbekistan, Tashkent city',
+        icon: <FaMapMarkedAlt />,
+        title: 'Location',
+        description: 'Tashkent, Uzbekistan (Open to remote work)',
     },
 ];
 import {motion} from "framer-motion";
@@ -73,32 +73,32 @@ const Contact = () => {
                 <div className="flex flex-col xl:flex-row gap-[30px]">
                     <div className="xl:w-[54%] order-2 xl:order-none">
                         <form onSubmit={sendEmail} ref={form} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl ">
-                            <h3 className="text-4xl text-accent">Let's work together </h3>
-                            <p className="text-white/60">I’m excited to bring your ideas to life with innovative solutions. Reach out, and let’s create something exceptional together.</p>
-                            {success && <span className="text-green-600 font-semibold">Your message has been sent successfully!</span>}
-                            {error && <span className="text-red-600 font-semibold">Something went wrong!</span>}
+                            <h3 className="text-4xl text-accent">Let’s build something great</h3>
+                            <p className="text-white/60"> I help companies and teams build scalable, high-performance web applications.
+                                If you’re looking for a reliable frontend engineer for a project or remote role, feel free to reach out.</p>
+                            {success && <span className="text-green-600 font-semibold">Thank you! Your message has been sent. I’ll get back to you shortly.</span>}
+                            {error && <span className="text-red-600 font-semibold">Oops! Something went wrong. Please try again later or contact me via email.</span>}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Input type="firstname" name="user_firstname" placeholder="Firstname"/>
-                                <Input type="lastname" name="user_lastname" placeholder="Lastname"/>
+                                <Input type="firstname" name="user_firstname" placeholder="First name"/>
+                                <Input type="lastname" name="user_lastname" placeholder="Last name"/>
                                 <Input type="email" name='user_email' placeholder="Email address"/>
-                                <Input type="phone" name="user_phone" placeholder="Phone number"/>
+                                <Input type="phone" name="user_phone" placeholder="Phone number (optional)"/>
                             </div>
                             <Select>
                                 <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Select a sevice "/>
+                                    <SelectValue placeholder="What are you looking for?"/>
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectLabel>Select a sevice</SelectLabel>
-                                        <SelectItem value="est">Web Developer</SelectItem>
-                                        <SelectItem value="cst">Teacher</SelectItem>
-                                        <SelectItem value="mst">Project Manager</SelectItem>
-                                        <SelectItem value="tsm">Freelancer</SelectItem>
+                                        <SelectLabel>Frontend Engineer (React / Next.js)</SelectLabel>
+                                        <SelectItem value="est">Remote Frontend Developer</SelectItem>
+                                        <SelectItem value="cst">Frontend Consulting</SelectItem>
+                                        <SelectItem value="mst">Mentorship / Teaching</SelectItem>
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
-                            <Textarea className="h-[200px]" name="user_message" placeholder="Type your message here."/>
-                            <Button type="submit"  size="md" className="max-w-40">Send message</Button>
+                            <Textarea className="h-[200px]" name="user_message" placeholder="Tell me about your project, role, or how I can help you."/>
+                            <Button type="submit"  size="md" className="max-w-40">Send Message</Button>
 
                         </form>
                     </div>

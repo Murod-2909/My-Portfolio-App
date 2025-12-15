@@ -7,27 +7,30 @@ import Link from "next/link";
 const services = [
     {
         num: '01',
-        title: 'Web Developer',
-        description: 'Creating responsive, high-speed websites tailored to your business needs, optimized for user experience, SEO, and cross-device compatibility.',
+        title: 'Senior Frontend Engineer',
+        description: 'Building scalable and high-performance frontend applications using\n' +
+            'React and Next.js. Focused on clean architecture, performance\n' +
+            'optimization, and delivering production-ready, maintainable UI\n' +
+            'solutions for real-world products.\n',
         href: ""
     },
     {
         num: '02',
-        title: 'Project Manager',
-        description: 'Leading projects from concept to completion, coordinating teams, managing timelines, and ensuring goals are met with quality and efficiency for optimal project success.',
+        title: 'Freelance Frontend Engineer (Remote, EU Clients)',
+        description: 'Delivering end-to-end frontend solutions for international clients,\n' +
+            'from requirements analysis to production deployment. Experienced\n' +
+            'in remote collaboration, feature ownership, and building SEO-\n' +
+            'optimized, mobile-first web applications.\n',
         href: ""
     },
     {
         num: '03',
-        title: 'Teacher',
-        description: 'Delivering hands-on learning in frontend technologies, guiding students through HTML, CSS, JavaScript, Next.js, React.js  and modern frameworks to build responsive, interactive web applications.',
+        title: 'Frontend Instructor & Mentor',
+        description: 'Teaching and mentoring frontend developers with a strong focus on\n' +
+            'React, JavaScript, and modern frontend practices. Guiding students\n' +
+            'through real-world projects, code reviews, and production-level\n' +
+            'development workflows.\n',
         href: "",
-    },
-    {
-        num: '04',
-        title: 'Freelancer',
-        description: 'Providing custom, high-quality frontend solutions, from responsive design to interactive features, ensuring seamless user experiences and efficient project delivery.',
-        href: ""
     },
 ]
 
