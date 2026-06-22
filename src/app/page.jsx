@@ -4,10 +4,15 @@ import {FiDownload} from "react-icons/fi";
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
+import dynamic from "next/dynamic";
+
+const ThreeBackground = dynamic(() => import("@/components/ThreeBackground"), { ssr: false });
+const Hero3DModel = dynamic(() => import("@/components/Hero3DModel"), { ssr: false });
 
 const Home = () => {
     return (
         <section className="h-full">
+            <ThreeBackground />
             <div className="container mx-auto h-full">
                 <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
                     <div className="text-center xl:text-left order-2 xl:order-none">
@@ -33,7 +38,10 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="order-1 xl:order-none mb-8 xl:mb-0">
+                    <div className="order-1 xl:order-none mb-8 xl:mb-0 relative">
+                        <div className="absolute inset-0 -z-10 opacity-60">
+                            <Hero3DModel />
+                        </div>
                         <Photo/>
                     </div>
                 </div>
