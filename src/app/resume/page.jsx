@@ -1,5 +1,7 @@
 "use client";
 import React from 'react';
+import dynamic from "next/dynamic";
+const TechSphere = dynamic(() => import("@/components/TechSphere"), { ssr: false });
 import {
     FaHtml5,
     FaCss3,
@@ -222,6 +224,7 @@ const Resume = () => {
                                     <h3 className="text-4xl font-bold">{skills.title}</h3>
                                     <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{skills.description}</p>
                                 </div>
+                                <TechSphere />
                                 <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px] gap-4">
                                     {skills.skillList.map((skill, index) => {
                                         return <li key={index}>
