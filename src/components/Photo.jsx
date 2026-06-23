@@ -23,9 +23,10 @@ const Photo = () => {
                     <Image
                         src="/assets/3.png"
                         priority
-                        quality={100}
+                        quality={90}
                         fill
-                        alt=""
+                        alt="Murod Shahriddinov"
+                        sizes="(max-width: 768px) 298px, 498px"
                         style={{borderRadius: "100%"}}
                         className="object-contain"
                     />

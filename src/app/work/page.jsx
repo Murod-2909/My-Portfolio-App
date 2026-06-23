@@ -230,6 +230,8 @@ const Work = () => {
                                                 fill
                                                 className="object-cover"
                                                 alt=""
+                                                quality={75}
+                                                sizes="(max-width: 768px) 100vw, 700px"
                                             />
                                         </div>
                                     </div>
