@@ -1,7 +1,5 @@
 "use client"
-import { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Text, OrbitControls } from '@react-three/drei'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 const techs = [
@@ -10,99 +8,125 @@ const techs = [
   'CSS3', 'HTML5', 'Git', 'Docker'
 ]
 
-function TechTag({ text, position, index }) {
-  const ref = useRef()
-  const [hovered, setHovered] = useState(false)
-  const offset = index * 0.5
-
-  useFrame((state) => {
-    const t = state.clock.elapsedTime * 0.4 + offset
-    ref.current.rotation.y = Math.sin(t * 0.3) * 0.2
-  })
-
-  return (
-    <group ref={ref} position={position}>
-      <mesh
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <boxGeometry args={[1.4, 0.4, 0.05]} />
-        <meshStandardMaterial
-          color={hovered ? '#00ff99' : '#1c1c22'}
-          transparent
-          opacity={hovered ? 0.9 : 0.7}
-          emissive={hovered ? '#00ff99' : '#003322'}
-          emissiveIntensity={hovered ? 0.5 : 0.1}
-        />
-      </mesh>
-      <Text
-        position={[0, 0, 0.04]}
-        fontSize={0.14}
-        color={hovered ? '#000000' : '#00ff99'}
-        anchorX="center"
-        anchorY="middle"
-        font="/fonts/jetbrains.woff"
-      >
-        {text}
-      </Text>
-    </group>
-  )
-}
-
-function SphereTags() {
-  const groupRef = useRef()
-
-  const positions = techs.map((_, i) => {
-    const phi = Math.acos(-1 + (2 * i) / techs.length)
-    const theta = Math.sqrt(techs.length * Math.PI) * phi
-    const r = 2.4
-    return [
-      r * Math.cos(theta) * Math.sin(phi),
-      r * Math.sin(theta) * Math.sin(phi),
-      r * Math.cos(phi),
-    ]
-  })
-
-  useFrame((state) => {
-    groupRef.current.rotation.y = state.clock.elapsedTime * 0.2
-    groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1
-  })
-
-  return (
-    <group ref={groupRef}>
-      {/* Center wireframe sphere */}
-      <mesh>
-        <sphereGeometry args={[1.8, 16, 16]} />
-        <meshStandardMaterial
-          color="#00ff99"
-          wireframe
-          transparent
-          opacity={0.08}
-        />
-      </mesh>
-      {techs.map((tech, i) => (
-        <TechTag key={tech} text={tech} position={positions[i]} index={i} />
-      ))}
-    </group>
-  )
+function makeTextTexture(text) {
+  const canvas = document.createElement('canvas')
+  canvas.width = 256
+  canvas.height = 64
+  const ctx = canvas.getContext('2d')
+  ctx.fillStyle = 'rgba(28,28,34,0.85)'
+  ctx.roundRect(4, 4, 248, 56, 10)
+  ctx.fill()
+  ctx.strokeStyle = '#00ff99'
+  ctx.lineWidth = 2
+  ctx.roundRect(4, 4, 248, 56, 10)
+  ctx.stroke()
+  ctx.fillStyle = '#00ff99'
+  ctx.font = 'bold 28px monospace'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText(text, 128, 32)
+  return new THREE.CanvasTexture(canvas)
 }
 
 export default function TechSphere() {
-  return (
-    <div className="w-full h-[500px] cursor-grab active:cursor-grabbing">
-      <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-        <ambientLight intensity={0.6} />
-        <pointLight position={[5, 5, 5]} intensity={1.5} color="#00ff99" />
-        <pointLight position={[-5, -5, -5]} intensity={0.5} color="#ffffff" />
-        <SphereTags />
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          autoRotate={false}
-          minPolarAngle={Math.PI / 4}
-          maxPolarAngle={Math.PI * 3 / 4}
-        />
-      </Canvas>
-    </div>
-  )
+  const mountRef = useRef(null)
+
+  useEffect(() => {
+    const mount = mountRef.current
+    const w = mount.clientWidth
+    const h = mount.clientHeight
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    renderer.setSize(w, h)
+    renderer.setPixelRatio(window.devicePixelRatio)
+    mount.appendChild(renderer.domElement)
+
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100)
+    camera.position.z = 6
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6))
+    const light = new THREE.PointLight(0x00ff99, 1.5)
+    light.position.set(5, 5, 5)
+    scene.add(light)
+
+    // Wireframe sphere center
+    const sphereGeo = new THREE.SphereGeometry(1.8, 16, 16)
+    const sphereMat = new THREE.MeshBasicMaterial({ color: 0x00ff99, wireframe: true, transparent: true, opacity: 0.08 })
+    const sphere = new THREE.Mesh(sphereGeo, sphereMat)
+    scene.add(sphere)
+
+    // Tech tags as sprites
+    const group = new THREE.Group()
+    scene.add(group)
+
+    techs.forEach((tech, i) => {
+      const phi = Math.acos(-1 + (2 * i) / techs.length)
+      const theta = Math.sqrt(techs.length * Math.PI) * phi
+      const r = 2.4
+      const x = r * Math.cos(theta) * Math.sin(phi)
+      const y = r * Math.sin(theta) * Math.sin(phi)
+      const z = r * Math.cos(phi)
+
+      const texture = makeTextTexture(tech)
+      const mat = new THREE.SpriteMaterial({ map: texture, transparent: true })
+      const sprite = new THREE.Sprite(mat)
+      sprite.position.set(x, y, z)
+      sprite.scale.set(1.4, 0.35, 1)
+      group.add(sprite)
+    })
+
+    // Mouse drag rotation
+    let isDragging = false
+    let prevMouse = { x: 0, y: 0 }
+    const onMouseDown = (e) => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY } }
+    const onMouseUp = () => { isDragging = false }
+    const onMouseMove = (e) => {
+      if (!isDragging) return
+      const dx = e.clientX - prevMouse.x
+      const dy = e.clientY - prevMouse.y
+      group.rotation.y += dx * 0.005
+      group.rotation.x += dy * 0.005
+      prevMouse = { x: e.clientX, y: e.clientY }
+    }
+    mount.addEventListener('mousedown', onMouseDown)
+    window.addEventListener('mouseup', onMouseUp)
+    window.addEventListener('mousemove', onMouseMove)
+
+    let animId
+    const clock = new THREE.Clock()
+
+    const animate = () => {
+      animId = requestAnimationFrame(animate)
+      const t = clock.getElapsedTime()
+      if (!isDragging) {
+        group.rotation.y = t * 0.2
+        group.rotation.x = Math.sin(t * 0.1) * 0.1
+      }
+      sphere.rotation.y = t * 0.05
+      renderer.render(scene, camera)
+    }
+    animate()
+
+    const handleResize = () => {
+      const w2 = mount.clientWidth
+      const h2 = mount.clientHeight
+      camera.aspect = w2 / h2
+      camera.updateProjectionMatrix()
+      renderer.setSize(w2, h2)
+    }
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      cancelAnimationFrame(animId)
+      window.removeEventListener('resize', handleResize)
+      mount.removeEventListener('mousedown', onMouseDown)
+      window.removeEventListener('mouseup', onMouseUp)
+      window.removeEventListener('mousemove', onMouseMove)
+      mount.removeChild(renderer.domElement)
+      renderer.dispose()
+    }
+  }, [])
+
+  return <div ref={mountRef} className="w-full h-[500px] cursor-grab active:cursor-grabbing" />
 }
