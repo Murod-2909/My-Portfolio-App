@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {motion} from "framer-motion";
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
@@ -149,12 +149,25 @@ const projects = [
 ];
 
 const Work = () => {
-    const [project, setProject] = useState(projects[0]);
+    const [projects, setProjects] = useState([]);
+    const [project, setProject] = useState(null);
+
+    useEffect(() => {
+        fetch('/api/projects')
+            .then(r => r.json())
+            .then(data => {
+                const list = Array.isArray(data) ? data : []
+                setProjects(list)
+                if (list.length > 0) setProject(list[0])
+            })
+    }, [])
 
     const handleSliderChange = (swiper) => {
         const currentIndex = swiper.activeIndex;
         setProject(projects[currentIndex])
     }
+
+    if (!project) return null;
     return (
         <motion.section
             initial={{opacity: 0}}
@@ -230,6 +243,8 @@ const Work = () => {
                                                 fill
                                                 className="object-cover"
                                                 alt=""
+                                                quality={75}
+                                                sizes="(max-width: 768px) 100vw, 700px"
                                             />
                                         </div>
                                     </div>
