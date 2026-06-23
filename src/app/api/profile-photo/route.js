@@ -2,10 +2,14 @@ import { supabase } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const { data } = await supabase.storage.from('portfolio').list('profile', { limit: 1, sortBy: { column: 'created_at', order: 'desc' } })
-  if (!data || data.length === 0) return NextResponse.json({ url: null })
-  const { data: urlData } = supabase.storage.from('portfolio').getPublicUrl(`profile/${data[0].name}`)
-  return NextResponse.json({ url: urlData.publicUrl })
+  try {
+    const { data, error } = await supabase.storage.from('portfolio').list('profile', { limit: 1, sortBy: { column: 'created_at', order: 'desc' } })
+    if (error || !data || data.length === 0) return NextResponse.json({ url: null })
+    const { data: urlData } = supabase.storage.from('portfolio').getPublicUrl(`profile/${data[0].name}`)
+    return NextResponse.json({ url: urlData.publicUrl })
+  } catch {
+    return NextResponse.json({ url: null })
+  }
 }
 
 export async function POST(req) {
