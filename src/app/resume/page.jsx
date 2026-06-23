@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from "next/dynamic";
 const TechSphere = dynamic(() => import("@/components/TechSphere"), { ssr: false });
 import {
@@ -158,6 +158,18 @@ const skills = {
 
 
 const Resume = () => {
+    const [expItems, setExpItems] = useState(experience.items)
+    const [eduItems, setEduItems] = useState(education.items)
+
+    useEffect(() => {
+        fetch('/api/resume')
+            .then(r => r.json())
+            .then(d => {
+                if (d.experiences?.length) setExpItems(d.experiences.map(e => ({ company: e.company, position: e.position, duration: e.duration })))
+                if (d.education?.length) setEduItems(d.education.map(e => ({ institution: e.institution, degree: e.degree, duration: e.duration })))
+            })
+    }, [])
+
     return (
         <motion.div
             initial={{opacity: 0}}
@@ -182,7 +194,7 @@ const Resume = () => {
                                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{experience.description}</p>
                                 <ScrollArea className="h-[400px]">
                                     <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
-                                        {experience.items.map((item, index) => {
+                                        {expItems.map((item, index) => {
                                             return <li key={index}
                                                        className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1">
                                                 <span className="text-accent">{item.duration}</span>
@@ -203,7 +215,7 @@ const Resume = () => {
                                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{education.description}</p>
                                 <ScrollArea className="h-[400px]">
                                     <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
-                                        {education.items.map((item, index) => {
+                                        {eduItems.map((item, index) => {
                                             return <li key={index}
                                                        className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1">
                                                 <span className="text-accent">{item.duration}</span>
