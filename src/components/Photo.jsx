@@ -1,9 +1,18 @@
 "use client"
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {motion} from "framer-motion";
 import Image from "next/image"
 
 const Photo = () => {
+    const [photoUrl, setPhotoUrl] = useState('/assets/3.png')
+
+    useEffect(() => {
+        fetch('/api/profile-photo')
+            .then(r => r.json())
+            .then(d => { if (d.url) setPhotoUrl(d.url) })
+            .catch(() => {})
+    }, [])
+
     return (
         <div className="w-full relative">
             <motion.div
@@ -21,7 +30,7 @@ const Photo = () => {
                     }}
                     className=" w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten absolute">
                     <Image
-                        src="/assets/3.png"
+                        src={photoUrl}
                         priority
                         quality={90}
                         fill
