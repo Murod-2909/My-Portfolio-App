@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const TABS = ['Messages', 'Projects', 'Services', 'Experience', 'Education']
+const TABS = ['Messages', 'Projects', 'Services', 'Experience', 'Education', 'Photo']
 
 function Modal({ title, onClose, children }) {
   return (
@@ -43,6 +43,9 @@ export default function AdminPage() {
   const [education, setEducation] = useState([])
   const [cvCount, setCvCount] = useState(0)
   const [modal, setModal] = useState(null) // { type, data }
+  const [currentPhoto, setCurrentPhoto] = useState(null)
+  const [photoFile, setPhotoFile] = useState(null)
+  const [photoUploading, setPhotoUploading] = useState(false)
 
   const login = (e) => {
     e.preventDefault()
@@ -59,6 +62,7 @@ export default function AdminPage() {
       setEducation(Array.isArray(d.education) ? d.education : [])
     })
     fetch('/api/cv-download').then(r => r.json()).then(d => setCvCount(d.total || 0))
+    fetch('/api/profile-photo').then(r => r.json()).then(d => setCurrentPhoto(d.url || null))
   }
 
   useEffect(() => { if (auth) loadAll() }, [auth])
@@ -244,6 +248,51 @@ export default function AdminPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* PHOTO */}
+        {tab === 'Photo' && (
+          <div className="max-w-md">
+            <h3 className="text-xl font-bold mb-4">Profile Photo</h3>
+            <div className="bg-[#27272c] rounded-xl p-6 flex flex-col gap-6">
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-accent/40 bg-primary flex items-center justify-center">
+                  {(photoFile ? URL.createObjectURL(photoFile) : currentPhoto) ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={photoFile ? URL.createObjectURL(photoFile) : currentPhoto}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-white/30 text-sm">No photo</span>
+                  )}
+                </div>
+                {photoFile && <span className="text-accent text-sm">{photoFile.name}</span>}
+              </div>
+              <label className="cursor-pointer bg-primary border border-white/20 rounded-lg px-4 py-3 text-center hover:border-accent transition text-sm text-white/70 hover:text-white">
+                Choose new photo (PNG, JPG, WebP)
+                <input type="file" accept="image/*" className="hidden" onChange={e => setPhotoFile(e.target.files[0] || null)} />
+              </label>
+              <button
+                disabled={!photoFile || photoUploading}
+                onClick={async () => {
+                  if (!photoFile) return
+                  setPhotoUploading(true)
+                  const fd = new FormData()
+                  fd.append('file', photoFile)
+                  const res = await fetch('/api/profile-photo', { method: 'POST', body: fd })
+                  const d = await res.json()
+                  if (d.url) { setCurrentPhoto(d.url); setPhotoFile(null); alert('Photo updated!') }
+                  else alert('Upload failed: ' + (d.error || 'unknown'))
+                  setPhotoUploading(false)
+                }}
+                className="bg-accent text-primary font-bold py-2 rounded-lg hover:bg-accent-hover transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {photoUploading ? 'Uploading...' : 'Upload Photo'}
+              </button>
             </div>
           </div>
         )}
