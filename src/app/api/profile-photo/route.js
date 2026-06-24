@@ -18,13 +18,6 @@ export async function POST(req) {
     const file = formData.get('file')
     if (!file) return NextResponse.json({ error: 'No file' }, { status: 400 })
 
-    // ensure bucket exists
-    const { data: buckets } = await supabase.storage.listBuckets()
-    const exists = buckets?.some(b => b.name === 'portfolio')
-    if (!exists) {
-      await supabase.storage.createBucket('portfolio', { public: true })
-    }
-
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
     const ext = file.name.split('.').pop()

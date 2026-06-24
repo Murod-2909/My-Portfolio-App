@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import {BsArrowDownRight} from "react-icons/bs";
 import {motion} from "framer-motion"
 import Link from "next/link";
+import dynamic from "next/dynamic";
+const ThreeBackground = dynamic(() => import("@/components/ThreeBackground"), { ssr: false });
 
 const Services = () => {
     const [services, setServices] = useState([])
@@ -15,6 +17,7 @@ const Services = () => {
 
     return (
         <section className="min-h-[80vh] flex flex-col justify-center py-12 xl:py-0">
+            <ThreeBackground />
             <div className="container mx-auto">
                 <motion.div
                     initial={{opacity: 0}}
