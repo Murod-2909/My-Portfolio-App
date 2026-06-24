@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react';
 import {motion} from "framer-motion";
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
+import dynamic from "next/dynamic";
+const ThreeBackground = dynamic(() => import("@/components/ThreeBackground"), { ssr: false });
 import {BsArrowUpRight, BsGithub} from "react-icons/bs";
 import {
     Tooltip,
@@ -176,6 +178,7 @@ const Work = () => {
                 transition: {delay: 2.4, duration: 0.4, ease: 'easeIn'}
             }}
             className="min-h-[80vh] h-full flex flex-col justify-center py-12 xl:px-0">
+            <ThreeBackground />
             <div className="container mx-auto">
                 <div className="flex flex-col xl:flex-row xl:gap-[30px]">
                     <div
