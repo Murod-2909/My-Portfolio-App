@@ -1,5 +1,7 @@
 "use client"
 import React, { useState } from 'react';
+import dynamic from "next/dynamic";
+const ThreeBackground = dynamic(() => import("@/components/ThreeBackground"), { ssr: false });
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Textarea} from "@/components/ui/textarea";
@@ -60,6 +62,7 @@ const Contact = () => {
             animate={{ opacity: 1, transition: {delay: 2.4, duration: 0.4, ease: 'easeIn'} }}
             className="py-6"
         >
+            <ThreeBackground />
             <div className="container mx-auto">
                 <div className="flex flex-col xl:flex-row gap-[30px]">
                     <div className="xl:w-[54%] order-2 xl:order-none">

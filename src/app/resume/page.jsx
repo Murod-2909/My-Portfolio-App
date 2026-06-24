@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from "next/dynamic";
 const TechSphere = dynamic(() => import("@/components/TechSphere"), { ssr: false });
+const ThreeBackground = dynamic(() => import("@/components/ThreeBackground"), { ssr: false });
 import {
     FaHtml5,
     FaCss3,
@@ -178,6 +179,7 @@ const Resume = () => {
                     delay: 2.4, duration: 0.4, ease: "easeIn"
                 }
             }} className="min-h-[80vh] flex items-center justify-center py-12 xl:py-0">
+            <ThreeBackground />
             <div className="container mx-auto">
                 <Tabs defaultValue="experience"
                       className="flex flex-col xl:flex-row gap-[60px]">
