@@ -31,7 +31,7 @@ const Home = () => {
                             and delivering production-ready applications for EU-based clients.
                         </p>
                         <div className="flex flex-col xl:flex-row items-center gap-8">
-                            <a href="/assets/shakhriddinov%20Murod.pdf" download="Murod_Shahriddinov_CV.pdf" onClick={handleCvDownload}>
+                            <a href="/assets/murod_shakhriddinov_cv.pdf" download="Murod_Shahriddinov_CV.pdf" onClick={handleCvDownload}>
                                 <Button variant="outline" size="lg" className="uppercase flex items-center gap-2">
                                     <span>Hire Me (Remote)</span>
                                     <FiDownload className="text-xl"/>
